@@ -55,10 +55,34 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   fillColor: Colors.black,
-                  filled: false,
+                  filled: true,
                   hintText: 'Enter a City Name',
-                  hintStyle: GoogleFonts.roboto()
+                  hintStyle: GoogleFonts.roboto(),
                 ),
+                textInputAction: TextInputAction.search,
+                onSubmitted: (value){
+                  var temp;
+                  if(temp == null){
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context){
+                          return AlertDialog(
+                            backgroundColor: Color(0xff030317),
+                            title: Text('City Not Found'),
+                            content: Text('Please Check The City Name'),
+                            actions: [
+                              TextButton(
+                                  onPressed: ()
+                                  {
+                                Navigator.of(context).pop();
+                              },
+                                  child: Text('Ok'),)
+                            ],
+                          );
+                        }
+                    );
+                  }
+                },
               ),
             ),
           ],
