@@ -122,6 +122,55 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                       ],
                     ),
             ),
+            Container(
+              margin: EdgeInsets.only(top: 10.0),
+              padding: EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                border: Border.all(width: 0.2, color: Colors.white),
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              child: Text(
+                'Updated',
+                style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
+              ),
+            ),
+            Container(
+              height: 220,
+              child: Stack(
+                children: [
+                  Image(
+                    image: AssetImage('assets/sunny.png'),
+                    fit: BoxFit.fill,
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    left: 0,
+                    child: Center(
+                      child: Column(
+                        children: [
+                          GlowText(
+                            '18',
+                            style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 40, height: 0.5),
+                          ),
+                          Text(
+                            city,
+                            style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 25),
+                          ),
+                          Text(
+                            '14 July 2024',
+                            style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 18),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Divider(
+              color: Colors.white,
+            ),
           ],
         ),
       ),

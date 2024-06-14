@@ -13,9 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        textTheme: Theme.of(context).textTheme.apply(bodyColor: Colors.white)
-      ),
+      theme: ThemeData(textTheme: Theme.of(context).textTheme.apply(bodyColor: Colors.white)),
       home: HomePage(),
       title: 'weather_app',
     );
