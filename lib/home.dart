@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'extraweather.dart';
+
 String city = 'Dammam';
 
 class HomePage extends StatefulWidget {
@@ -171,6 +173,8 @@ class _CurrentWeatherState extends State<CurrentWeather> {
             Divider(
               color: Colors.white,
             ),
+            SizedBox(height: 15,),
+            ExtraWeather(),
           ],
         ),
       ),
