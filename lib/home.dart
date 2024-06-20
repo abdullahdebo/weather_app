@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'Detailpage.dart';
 import 'extraweather.dart';
 
 String city = 'Dammam';
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           CurrentWeather(),
+          TodayWeather(),
         ],
       ),
     );
@@ -36,13 +38,13 @@ class CurrentWeather extends StatefulWidget {
 }
 
 class _CurrentWeatherState extends State<CurrentWeather> {
-  @override
   var focusNode = FocusNode();
   bool searchBar = false;
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: GlowContainer(
-        height: MediaQuery.of(context).size.height / 1.5,
+        height: MediaQuery.of(context).size.height / 1.4,
         margin: EdgeInsets.all(2.0),
         padding: EdgeInsets.only(top: 60, left: 30, right: 30),
         glowColor: Color(0xff00A1FF),
@@ -160,7 +162,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                             style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 25),
                           ),
                           Text(
-                            '14 July 2024',
+                            '15 / 6 / 2024 ',
                             style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 18),
                           ),
                         ],
@@ -173,7 +175,9 @@ class _CurrentWeatherState extends State<CurrentWeather> {
             Divider(
               color: Colors.white,
             ),
-            SizedBox(height: 15,),
+            SizedBox(
+              height: 15,
+            ),
             ExtraWeather(),
           ],
         ),
@@ -181,3 +185,48 @@ class _CurrentWeatherState extends State<CurrentWeather> {
     );
   }
 }
+
+class TodayWeather extends StatelessWidget {
+  const TodayWeather({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 30, right: 30, top: 10),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Today',
+                style: GoogleFonts.roboto(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+                    return Detailpage();
+                  }));
+                },
+                child: Row(
+                  children: [
+                    Text(
+                      '7 Days',
+                      style: GoogleFonts.roboto(color: Colors.grey, fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios_outlined,
+                      color: Colors.grey,
+                      size: 15,
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
