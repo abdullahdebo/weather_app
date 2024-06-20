@@ -44,7 +44,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: GlowContainer(
-        height: MediaQuery.of(context).size.height / 1.4,
+        height: MediaQuery.of(context).size.height / 1.5,
         margin: EdgeInsets.all(2.0),
         padding: EdgeInsets.only(top: 60, left: 30, right: 30),
         glowColor: Color(0xff00A1FF),
@@ -69,25 +69,23 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                       textInputAction: TextInputAction.search,
                       onSubmitted: (value) {
                         var temp;
-                        if (temp == null) {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  backgroundColor: Color(0xff030317),
-                                  title: Text('City Not Found'),
-                                  content: Text('Please Check The City Name'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('Ok'),
-                                    )
-                                  ],
-                                );
-                              });
-                        }
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: Color(0xff030317),
+                                title: Text('City Not Found'),
+                                content: Text('Please Check The City Name'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('Ok'),
+                                  )
+                                ],
+                              );
+                            });
                       },
                     )
                   : Row(
@@ -224,9 +222,63 @@ class TodayWeather extends StatelessWidget {
               ),
             ],
           ),
+          SizedBox(
+            height: 15,
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 30),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              weatherWidget(),
+              weatherWidget(),
+              weatherWidget(),
+              weatherWidget(),
+            ],
+          ),
         ],
       ),
     );
   }
 }
 
+class weatherWidget extends StatelessWidget {
+  const weatherWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        border: Border.all(width: 0.2, color: Colors.white),
+        borderRadius: BorderRadius.circular(35),
+      ),
+      child: Column(
+        children: [
+          Text(
+            '17' '+' '\u00B0',
+            style: GoogleFonts.roboto(
+              fontSize: 20,
+            ),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Image(
+            image: AssetImage('assets/sunny.png'),
+            width: 50,
+            height: 50,
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            '12.00',
+            style: GoogleFonts.roboto(fontSize: 16, color: Colors.grey),
+          )
+        ],
+      ),
+    );
+  }
+}

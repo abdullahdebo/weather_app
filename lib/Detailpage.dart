@@ -14,6 +14,7 @@ class Detailpage extends StatelessWidget {
       body: Column(
         children: [
           TomorroWeather(),
+          Sevendays(),
         ],
       ),
     );
@@ -95,7 +96,7 @@ class TomorroWeather extends StatelessWidget {
                             style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 100),
                           ),
                           Text(
-                            '/' + '15' '\u0080',
+                            '/' + '15' '\u00B0',
                             style: GoogleFonts.roboto(
                               fontSize: 40,
                               color: Colors.black.withOpacity(0.3),
@@ -128,9 +129,60 @@ class TomorroWeather extends StatelessWidget {
                   ),
                   ExtraWeather(),
                 ],
-              ))
+              )),
         ],
       ),
     );
+  }
+}
+
+class Sevendays extends StatelessWidget {
+  const Sevendays({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(child: ListView.builder(itemBuilder: (BuildContext context, int index) {
+      return Padding(
+        padding: const EdgeInsets.only(left: 20,right: 20,bottom: 25),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Wed',
+              style: GoogleFonts.roboto(fontSize: 15),
+            ),
+            Container(
+              width: 135,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Image(
+                    image: AssetImage('assets/sunny.png'),
+                    width: 40,
+                  ),
+                  Text(
+                    'Clear',
+                    style: GoogleFonts.roboto(fontSize: 20),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              children: [
+                Text(
+                  '+' '30''\u00B0',
+                  style: GoogleFonts.roboto(fontSize: 20, color: Colors.grey),
+                ),
+                SizedBox(width: 5,),
+                Text(
+                  '+' '18''\u00B0',
+                  style: GoogleFonts.roboto(fontSize: 20, color: Colors.grey),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    }));
   }
 }
