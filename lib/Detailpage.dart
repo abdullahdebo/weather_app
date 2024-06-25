@@ -143,7 +143,7 @@ class Sevendays extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(child: ListView.builder(itemBuilder: (BuildContext context, int index) {
       return Padding(
-        padding: const EdgeInsets.only(left: 20,right: 20,bottom: 25),
+        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 25),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -170,12 +170,14 @@ class Sevendays extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  '+' '30''\u00B0',
+                  '+' '30' '\u00B0',
                   style: GoogleFonts.roboto(fontSize: 20, color: Colors.grey),
                 ),
-                SizedBox(width: 5,),
+                SizedBox(
+                  width: 5,
+                ),
                 Text(
-                  '+' '18''\u00B0',
+                  '+' '18' '\u00B0',
                   style: GoogleFonts.roboto(fontSize: 20, color: Colors.grey),
                 ),
               ],

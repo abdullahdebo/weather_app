@@ -4,6 +4,7 @@ import 'package:flutter_glow/flutter_glow.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'Detailpage.dart';
+import 'data.dart';
 import 'extraweather.dart';
 
 String city = 'Dammam';
@@ -68,24 +69,29 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                       ),
                       textInputAction: TextInputAction.search,
                       onSubmitted: (value) {
+                        fetchCity(value).then((city)async{
+                         await fetchData(city!.lat.toString(), city.lon.toString(), city.name.toString()).then((value){
+                           print(value);
+                         });
+                        });
                         var temp;
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                backgroundColor: Color(0xff030317),
-                                title: Text('City Not Found'),
-                                content: Text('Please Check The City Name'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text('Ok'),
-                                  )
-                                ],
-                              );
-                            });
+                        // showDialog(
+                        //     context: context,
+                        //     builder: (BuildContext context) {
+                        //       return AlertDialog(
+                        //         backgroundColor: Color(0xff030317),
+                        //         title: Text('City Not Found'),
+                        //         content: Text('Please Check The City Name'),
+                        //         actions: [
+                        //           TextButton(
+                        //             onPressed: () {
+                        //               Navigator.of(context).pop();
+                        //             },
+                        //             child: Text('Ok'),
+                        //           )
+                        //         ],
+                        //       );
+                        //     });
                       },
                     )
                   : Row(
@@ -276,7 +282,7 @@ class weatherWidget extends StatelessWidget {
           Text(
             '12.00',
             style: GoogleFonts.roboto(fontSize: 16, color: Colors.grey),
-          )
+          ),
         ],
       ),
     );
