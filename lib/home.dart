@@ -7,7 +7,6 @@ import 'Detailpage.dart';
 import 'data.dart';
 import 'extraweather.dart';
 
-String city = 'Dammam';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -41,6 +40,7 @@ class CurrentWeather extends StatefulWidget {
 class _CurrentWeatherState extends State<CurrentWeather> {
   var focusNode = FocusNode();
   bool searchBar = false;
+  Weather ? currentWeather;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -72,6 +72,9 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                         fetchCity(value).then((city)async{
                          await fetchData(city!.lat.toString(), city.lon.toString(), city.name.toString()).then((value){
                            print(value);
+                           setState(() {
+                             currentWeather= value!;
+                           });
                          });
                         });
                         var temp;
@@ -114,7 +117,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                                 focusNode.requestFocus();
                               },
                               child: Text(
-                                ' $city',
+                                currentWeather == null ? '--': '${currentWeather?.name.toString()}',
                                 style: GoogleFonts.roboto(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 30,
@@ -158,11 +161,11 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                       child: Column(
                         children: [
                           GlowText(
-                            '18',
+                            currentWeather == null ? '0 ': '${currentWeather?.current.toString()}',
                             style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 40, height: 0.5),
                           ),
                           Text(
-                            city,
+                            currentWeather == null ? '--': '${currentWeather?.name.toString()}',
                             style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 25),
                           ),
                           Text(
@@ -182,7 +185,77 @@ class _CurrentWeatherState extends State<CurrentWeather> {
             SizedBox(
               height: 15,
             ),
-            ExtraWeather(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  children: [
+                    Icon(
+                      CupertinoIcons.wind,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      currentWeather == null ? '0' + ' ' 'K/m':'${currentWeather?.wind.toString()} K/m',
+                      style: GoogleFonts.roboto(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Wind',
+                      style: GoogleFonts.roboto(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Icon(
+                      CupertinoIcons.drop,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      currentWeather == null ? '0%': '${currentWeather?.humidtiy.toString()}%',
+                      style: GoogleFonts.roboto(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Humidity',
+                      style: GoogleFonts.roboto(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Icon(
+                      CupertinoIcons.cloud_rain,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      currentWeather == null ? '0' + ' ' 'K/m':'${currentWeather?.chanceRain.toString()}%',
+                      style: GoogleFonts.roboto(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Rain',
+                      style: GoogleFonts.roboto(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  ],
+                ),
+              ],
+            )
           ],
         ),
       ),
